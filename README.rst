@@ -1,4 +1,4 @@
-# Python PG Extras [![PyPI version](https://badge.fury.io/py/pg-extras.svg)](https://badge.fury.io/py/pg-extras)
+# Python PostgreSQL Performance Tools
 
 Python port of [Heroku PG Extras](https://github.com/heroku/heroku-pg-extras) with several additions and improvements. The goal of this project is to provide powerful insights into the PostgreSQL database for Python apps that are not using the Heroku PostgreSQL plugin.
 
