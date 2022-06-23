@@ -40,7 +40,7 @@ You should see the similar line in the output:
 
 ## Usage
 
-Please edit the config in your home directory, the file name is .pg-extras.yml
+Please edit the config in your home directory, the file name is .pgperf.yml
 
 ```yaml
 prod:
@@ -72,7 +72,7 @@ pgperf cache_hit
 By default the ASCII table is displayed. Alternatively you can get full excel report with:
 
 ```bash
-pg-extrass full_report
+pgperf full_report
 ```
 
 ## Available methods
