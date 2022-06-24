@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pgperf"
-version = "0.1.1"
-description = ""
+version = "0.1.2"
+description = "Python port of [Heroku PG Extras](https://github.com/heroku/heroku-pg-extras) with several additions and improvements. The goal of this project is to provide powerful insights into the PostgreSQL database for Python apps that are not using the Heroku PostgreSQL plugin."
 authors = ["Aldo A. Villagra B. <aldovillagra@gmail.com>"]
 
 [tool.poetry.dependencies]
