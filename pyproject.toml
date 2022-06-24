@@ -1,14 +1,16 @@
 [tool.poetry]
 name = "pgperf"
-version = "0.1.4"
-description = "Python port of [Heroku PG Extras](https://github.com/heroku/heroku-pg-extras) with several additions and improvements. The goal of this project is to provide powerful insights into the PostgreSQL database for Python apps that are not using the Heroku PostgreSQL plugin."
+version = "0.1.5"
+description = "PostgreSQL Performance Tools"
 authors = ["Aldo A. Villagra B. <aldovillagra@gmail.com>"]
-include = ["README.rst"]
+license = "GNU GPLv3"
+readme = "README.rst"
+homepage = "https://github.com/aldovillagra/pgperf"
+repository = "https://github.com/aldovillagra/pgperf"
+documentation = "https://github.com/aldovillagra/pgperf#readme"
+include = ["README.rst", "LICENSE.txt"]
 
 [tool.poetry.urls]
-"homepage" = "https://github.com/aldovillagra/pgperf"
-"documentation" = "https://github.com/aldovillagra/pgperf#readme"
-"repository" = "https://github.com/aldovillagra/pgperf"
 "Bug Tracker" = "https://github.com/aldovillagra/pgperf/issues"
 
 [tool.poetry.dependencies]
