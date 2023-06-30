@@ -1,11 +1,11 @@
 from pgperf import console, config, __version__
 from pgperf.db import Db
-from pgperf.monitor import app as monitor_app
+from pgperf.server import app as server_app
 import pandas as pd
 import typer
 
 app = typer.Typer()
-app.add_typer(monitor_app, name="monitor")
+app.add_typer(server_app, name="server")
 
 state = {"conf": config['prod']}
 

@@ -25,6 +25,9 @@ class Db():
         template = env.get_template(name)
         return text(template.render())
 
+    def get_from_path(self, path, name):
+        return self.read_sql(self._get_sql(path + name + ".sql"))
+
     def add_extensions(self):
         self.exec(self._get_sql("add_extensions.sql"))
 
@@ -127,24 +130,26 @@ class Db():
     def vacuum_stats(self):
         return self.read_sql(self._get_sql("vacuum_stats.sql"))
 
-    # Monitor
+    def pg_stat_statements_reset(self):
+        return self.read_sql(self._get_sql("server/stats/pg_stat_statements_reset.sql"))
+
+    # server -> stats -> dinamic
     def pg_stat_activity(self):
-        return self.read_sql(self._get_sql("monitor/pg_stat_activity.sql"))
+        return self.read_sql(self._get_sql("server/stats/pg_stat_activity.sql"))
 
     def pg_stat_replication(self):
-        return self.read_sql(self._get_sql("monitor/pg_stat_replication.sql"))
+        return self.read_sql(self._get_sql("server/stats/pg_stat_replication.sql"))
 
     def pg_stat_wal_receiver(self):
-        return self.read_sql(self._get_sql("monitor/pg_stat_wal_receiver.sql"))
+        return self.read_sql(self._get_sql("server/stats/pg_stat_wal_receiver.sql"))
 
     def pg_stat_subscription(self):
-        return self.read_sql(self._get_sql("monitor/pg_stat_subscription.sql"))
+        return self.read_sql(self._get_sql("server/stats/pg_stat_subscription.sql"))
 
     def pg_stat_ssl(self):
-        return self.read_sql(self._get_sql("monitor/pg_stat_ssl.sql"))
+        return self.read_sql(self._get_sql("server/stats/pg_stat_ssl.sql"))
 
     def pg_stat_progress_vacuum(self):
-        return self.read_sql(self._get_sql("monitor/pg_stat_progress_vacuum.sql"))
+        return self.read_sql(self._get_sql("server/stats/pg_stat_progress_vacuum.sql"))
 
-    def pg_stat_statements_reset(self):
-        return self.read_sql(self._get_sql("monitor/pg_stat_statements_reset.sql"))
+    # server -> stats -> collected
