@@ -1,6 +1,5 @@
-__version__ = '0.1.5'
+__version__ = '1.0.0'
 
-import fire
 import os
 from rich.console import Console
 from omegaconf import OmegaConf
@@ -36,7 +35,3 @@ env = Environment(loader=file_loader)
 env.trim_blocks = True
 env.lstrip_blocks = True
 env.rstrip_blocks = True
-
-debug = os.getenv('DEBUG')
-log = os.getenv('LOG')
-conn = os.getenv('CONN')

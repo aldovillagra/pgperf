@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pgperf"
-version = "0.1.5"
+version = "1.0.0"
 description = "PostgreSQL Performance Tools"
 authors = ["Aldo A. Villagra B. <aldovillagra@gmail.com>"]
 license = "GPL-3.0-or-later"
@@ -15,8 +15,6 @@ include = ["README.rst", "LICENSE.txt"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-rich = "^12.4.4"
-fire = "^0.4.0"
 omegaconf = "^2.2.1"
 pandas = "^1.4.2"
 SQLAlchemy = "^1.4.36"
@@ -25,13 +23,21 @@ psycopg2 = "^2.9.3"
 tabulate = "^0.8.9"
 Jinja2 = "^3.1.2"
 XlsxWriter = "^3.0.3"
+typer = {extras = ["all"], version = "^0.9.0"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+
+[tool.poetry.group.dev.dependencies]
+mkdocs = "^1.4.3"
+ruff = "^0.0.275"
+ipdb = "^0.13.13"
+deptry = "^0.12.0"
+poethepoet = "^0.20.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-pgperf = 'pgperf.main:run'
+pgperf = 'pgperf.main:app'
