@@ -22,16 +22,6 @@ def main(conf: str = ""):
 
 
 @app.command()
-def active_conections():
-    """
-    List all active connections in this moments in your database
-    """
-    db = Db(state['conf'])
-    result = db.active_conection()
-    console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
 def all_locks():
     """
     List all current locks in your database
@@ -114,16 +104,6 @@ def calls():
 
 
 @app.command()
-def db_settings():
-    """
-    Get the DB Settings
-    """
-    db = Db(state['conf'])
-    result = db.db_settings()
-    console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
 def duplicate_indexes():
     """
     Show multiple indexes that have the same set of columns, same opclass, expression and predicate.
@@ -131,25 +111,6 @@ def duplicate_indexes():
     db = Db(state['conf'])
     result = db.duplicate_indexes()
     console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
-def extensions():
-    """
-    Get available and installed extensions
-    """
-    db = Db(state['conf'])
-    result = db.extensions()
-    console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
-def add_extensions():
-    """
-    Adding Extensions [sslinfo, pg_buffercache, pg_stat_statements] to your database.
-    """
-    db = Db(state['conf'])
-    db.add_extensions()
 
 
 @app.command()
@@ -200,16 +161,6 @@ def indexes():
     db = Db(state['conf'])
     result = db.indexes()
     console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
-def kill_all(confirm: bool = typer.Option(default=False)):
-    """
-    Kill all the active database connections
-    """
-    if confirm:
-        db = Db(state['conf'])
-        db.kill_all()
 
 
 @app.command()
@@ -269,16 +220,6 @@ def seq_scans():
     """
     db = Db(state['conf'])
     result = db.seq_scans()
-    console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
-def ssl_used():
-    """
-    Check if SSL connection is used 
-    """
-    db = Db(state['conf'])
-    result = db.ssl_used()
     console.print(result.to_markdown(), justify="center")
 
 
@@ -351,16 +292,6 @@ def unused_indexes():
     """
     db = Db(state['conf'])
     result = db.unused_indexes()
-    console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
-def vacuum_stats():
-    """
-    Dead rows and whether an automatic vacuum is expected to be triggered
-    """
-    db = Db(state['conf'])
-    result = db.vacuum_stats()
     console.print(result.to_markdown(), justify="center")
 
 

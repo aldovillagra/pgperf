@@ -28,8 +28,8 @@ class Db():
     def get_from_path(self, path, name):
         return self.read_sql(self._get_sql(path + name + ".sql"))
 
-    def add_extensions(self):
-        self.exec(self._get_sql("add_extensions.sql"))
+    def exec_from_path(self, path, name):
+        return self.exec(self._get_sql(path + name + ".sql"))
 
     def kill_all(self):
         self.exec(self._get_sql("kill_all.sql"))

@@ -3,7 +3,7 @@ from pgperf.db import Db
 import typer
 
 app = typer.Typer()
-state = {"conf": config['prod']}
+state = {"conf": config['prod'], "path": "server/stats/dinamic/"}
 
 
 @app.callback()
@@ -23,7 +23,7 @@ def activity():
     See pg_stat_activity for details. ( >= PostgresSQL  11.0 )
     """
     db = Db(state['conf'])
-    result = db.pg_stat_activity()
+    result = db.get_from_path(state['path'], "pg_stat_activity")
     console.print(result.to_markdown(), justify="center")
 
 
@@ -35,7 +35,7 @@ def replication():
     See pg_stat_replication for details. ( >= PostgresSQL  11.0 )
     """
     db = Db(state['conf'])
-    result = db.pg_stat_replication()
+    result = db.get_from_path(state['path'], "pg_stat_replication")
     console.print(result.to_dict(), justify="left")
 
 
@@ -47,7 +47,7 @@ def wal_receiver():
     ( >= PostgresSQL  11.0 )
     """
     db = Db(state['conf'])
-    result = db.pg_stat_wal_receiver()
+    result = db.get_from_path(state['path'], "pg_stat_wal_receiver")
     console.print(result.to_dict(), justify="left")
 
 
@@ -59,7 +59,7 @@ def subscription():
     See pg_stat_subscription for details. ( >= PostgresSQL  11.0 )
     """
     db = Db(state['conf'])
-    result = db.pg_stat_subscription()
+    result = db.get_from_path(state['path'], "pg_stat_subscription")
     console.print(result.to_markdown(), justify="left")
 
 
@@ -71,7 +71,7 @@ def ssl():
     See pg_stat_ssl for details.
     """
     db = Db(state['conf'])
-    result = db.pg_stat_ssl()
+    result = db.get_from_path(state['path'], "pg_stat_ssl")
     console.print(result.to_markdown(), justify="left")
 
 
@@ -82,7 +82,7 @@ def progress_vacuum():
     running VACUUM, showing current progress. ( >= PostgresSQL  11.0 )
     """
     db = Db(state['conf'])
-    result = db.pg_stat_progress_vacuum()
+    result = db.get_from_path(state['path'], "pg_stat_progress_vacuum")
     console.print(result.to_markdown(), justify="left")
 
 
@@ -93,7 +93,7 @@ def statements_reset():
     pg_stat_statements ( >= PostgresSQL  11.0 )
     """
     db = Db(state['conf'])
-    result = db.pg_stat_statements_reset()
+    result = db.get_from_path(state['path'], "pg_stat_statements_reset")
     console.print(result.to_markdown(), justify="center")
 
 

@@ -13,7 +13,8 @@ state = {"conf": config['prod']}
 @app.callback()
 def main(verbose: bool = False, debug: bool = False, conf: str = ""):
     """
-    monitor 
+    The Statistics Collector.
+    PostgreSQL's statistics collector is a subsystem that supports collection and reporting of information about server activity. 
     """
     if conf:
         state['conf'] = config[conf]
