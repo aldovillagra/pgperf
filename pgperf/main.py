@@ -1,50 +1,35 @@
 from pgperf import console, config, __version__
 from pgperf.db import Db
+from pgperf.monitor import app as monitor_app
 import pandas as pd
 import typer
 
 app = typer.Typer()
-state = {"verbose": False, "debug": False, "conf": config['prod']}
+app.add_typer(monitor_app, name="monitor")
+
+state = {"conf": config['prod']}
+
 
 @app.callback()
-def main(verbose: bool = False, debug: bool = False, conf: str = ""):
+def main(conf: str = ""):
     """
     Python port of [Heroku PG Extras](https://github.com/heroku/heroku-pg-extras) with several additions and improvements.
 
     The goal of this project is to provide powerful insights into the PostgreSQL database for Python apps that are not using the Heroku PostgreSQL plugin.
     """
-    if verbose:
-        state["verbose"] = True
-    if debug:
-        state["debug"] = True
     if conf:
         state['conf'] = config[conf]
 
-@app.command()
-def add_extensions():
-    """
-    Adding Extensions [sslinfo, pg_buffercache, pg_stat_statements] to your database.
-    """
-    if state['verbose']:
-        console.rule(
-            "[bold] Adding Extensions [sslinfo, pg_buffercache, pg_stat_statements]")
-    db = Db(state['conf'])
-    db.add_extensions()
-    if state['verbose']:
-        console.rule()
 
 @app.command()
 def active_conections():
     """
     List all active connections in this moments in your database
     """
-    if state['verbose']:
-        console.rule("[bold] All the current locks")
     db = Db(state['conf'])
     result = db.active_conection()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def all_locks():
@@ -56,72 +41,56 @@ def all_locks():
     db = Db(state['conf'])
     result = db.all_locks()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def bloat():
     """
     Estimation of table 'bloat' space allocated to a relation that is full of dead tuples, that has yet to be reclaimed.
     """
-    if state['verbose']:
-        console.rule(
-            "[bold] Estimation of table 'bloat' space allocated to a relation that is full of dead tuples, that has yet to be reclaimed.")
     result = db.bloat()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def blocking():
     """
     Get all statements that are currently holding locks in your database
     """
-    if state['verbose']:
-        console.rule("[bold] Statements that are currently holding locks.")
     db = Db(state['conf'])
     result = db.blocking()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def buffercache_stats():
     """
     Get all Buffercache Stats
     """
-    if state['verbose']:
-        console.rule("[bold] Buffercache Stats.")
     db = Db(state['conf'])
     result = db.buffercache_stats()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def buffercache_usage():
     """
     Get all Buffercache Usage
     """
-    if state['verbose']:
-        console.rule("[bold] Buffercache Stats.")
     db = Db(state['conf'])
     result = db.buffercache_usage()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def cache_hits():
     """
     Get all cache hits
     """
-    console.rule("[bold] Cache Hits")
     db = Db(state['conf'])
     result = db.cache_hit()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def calls_legacy():
@@ -129,324 +98,249 @@ def calls_legacy():
     Get the queries that have highest frequency of execution
     """
     # TODO: Pendind test and validate
-    if state['verbose']:
-        console.rule("[bold] Calls Legacy")
     db = Db(state['conf'])
     result = db.calls_legacy()
     console.print(result.to_markdown())
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def calls():
     """
     Get the queries that have highest frequency of execution
     """
-    if state['verbose']:
-        console.rule("[bold] Calls")
     db = Db(state['conf'])
     result = db.calls()
     console.print(result.to_markdown())
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def db_settings():
     """
     Get the DB Settings
     """
-    if state['verbose']:
-        console.rule("[bold] DB Settings")
     db = Db(state['conf'])
     result = db.db_settings()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def duplicate_indexes():
     """
     Show multiple indexes that have the same set of columns, same opclass, expression and predicate.
     """
-    if state['verbose']:
-        console.rule("[bold] Duplicate Indexes")
     db = Db(state['conf'])
     result = db.duplicate_indexes()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def extensions():
     """
     Get available and installed extensions
     """
-    if state['verbose']:
-        console.rule("[bold] Extensions")
     db = Db(state['conf'])
     result = db.extensions()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
+
+@app.command()
+def add_extensions():
+    """
+    Adding Extensions [sslinfo, pg_buffercache, pg_stat_statements] to your database.
+    """
+    db = Db(state['conf'])
+    db.add_extensions()
+
 
 @app.command()
 def index_cache_hit():
     """
     Calculates your cache hit rate for reading indexes
     """
-    if state['verbose']:
-        console.rule("[bold] Indexes Cache Hit")
     db = Db(state['conf'])
     result = db.index_cache_hit()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def index_scans():
     """
     Number of scans performed on indexes
     """
-    if state['verbose']:
-        console.rule("[bold] Table's indexes scans")
     db = Db(state['conf'])
     result = db.index_scans()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def index_size():
     """
     The size of indexes, descending by size, in MB.
     """
-    if state['verbose']:
-        console.rule("[bold] Index Size")
     db = Db(state['conf'])
     result = db.index_size()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def index_usage():
     """
     Index hit rate (effective databases are at 99% and up)
     """
-    if state['verbose']:
-        console.rule("[bold] Efficiency of Index Usage")
     db = Db(state['conf'])
     result = db.index_usage()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def indexes():
     """
     List all the indexes with their corresponding tables and columns.
     """
-    if state['verbose']:
-        console.rule("[bold] Efficiency of indexes")
     db = Db(state['conf'])
     result = db.indexes()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def kill_all(confirm: bool = typer.Option(default=False)):
     """
     Kill all the active database connections
     """
-    if state['verbose']:
-        console.rule("[bold red] KILL ALL SESSIONs")
     if confirm:
         db = Db(state['conf'])
         db.kill_all()
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def locks():
     """
     Queries with active exclusive locks
     """
-    if state['verbose']:
-        console.rule("[bold] Locks")
     db = Db(state['conf'])
     result = db.locks()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def long_running_queries():
     """
     All queries longer than five minutes by descending duration
     """
-    if state['verbose']:
-        console.rule("[bold] Long Running Queries")
     db = Db(state['conf'])
     result = db.long_running_queries()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def null_indexes():
     """
     Find indexes with a high ratio of NULL values
     """
-    if state['verbose']:
-        console.rule("[bold] Null Indexes")
     db = Db(state['conf'])
     result = db.null_indexes()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def outliers():
     """
     Queries that have longest execution time in aggregate
     """
-    if state['verbose']:
-        console.rule("[bold] Outliers")
     db = Db(state['conf'])
     result = db.outliers()
     console.print(result.to_markdown())
-    if state['verbose']:
-        console.rule()
 
-@app.command()
-def pg_stat_statements_reset():
-    """
-    pg_stat_statements_reset discards statistics gathered so far by pg_stat_statements
-    """
-    if state['verbose']:
-        console.rule("[bold] PostgreSQL Stat Statements Reset")
-    db = Db(state['conf'])
-    db.pg_stat_statements_reset()
-    if state['verbose']:
-        console.rule()
 
 @app.command()
 def records_rank():
     """
     All tables and the number of rows in each ordered by number of rows descending
     """
-    if state['verbose']:
-        console.rule("[bold] Records Rank")
     db = Db(state['conf'])
     result = db.records_rank()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def seq_scans():
     """
     Count of sequential scans by table descending by order
     """
-    if state['verbose']:
-        console.rule("[bold] Sequential Scans")
     db = Db(state['conf'])
     result = db.seq_scans()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def ssl_used():
     """
     Check if SSL connection is used 
     """
-    if state['verbose']:
-        console.rule("[bold] Number of SSL client.")
     db = Db(state['conf'])
     result = db.ssl_used()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def table_cache_hit():
     """
     Calculates your cache hit rate for reading tables
     """
-    if state['verbose']:
-        console.rule("[bold] Table cache hit")
     db = Db(state['conf'])
     result = db.table_cache_hit()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def table_index_scans():
     """
     Count of index scans by table descending by order
     """
-    if state['verbose']:
-        console.rule("[bold] Table Index Scans.")
     db = Db(state['conf'])
     result = db.table_index_scans()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def table_index_size():
     """
     Total size of all the indexes on each table, descending by size
     """
-    if state['verbose']:
-        console.rule("[bold] Table Index Size")
     db = Db(state['conf'])
     result = db.table_index_size()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def table_size():
     """
     Size of the tables (excluding indexes), descending by size
     """
-    if state['verbose']:
-        console.rule("[bold] Table Size")
     db = Db(state['conf'])
     result = db.table_size()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def total_index_size():
     """
     Total size of all indexes in MB
     """
-    if state['verbose']:
-        console.rule("[bold] Total Index Size")
     db = Db(state['conf'])
     result = db.total_index_size()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def total_table_size():
     """
     Size of the tables (including indexes), descending by size
     """
-    if state['verbose']:
-        console.rule("[bold] Total Table Size")
     db = Db(state['conf'])
     result = db.total_table_size()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def unused_indexes():
@@ -455,34 +349,26 @@ def unused_indexes():
     Exclude indexes of very small tables (less than 5 pages), where the planner will almost invariably select a sequential scan,
     but may not in the future as the table grows
     """
-    if state['verbose']:
-        console.rule("[bold] Unused Indexes")
     db = Db(state['conf'])
     result = db.unused_indexes()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def vacuum_stats():
     """
     Dead rows and whether an automatic vacuum is expected to be triggered
     """
-    if state['verbose']:
-        console.rule("[bold] Vacuum Stats")
     db = Db(state['conf'])
     result = db.vacuum_stats()
     console.print(result.to_markdown(), justify="center")
-    if state['verbose']:
-        console.rule()
+
 
 @app.command()
 def full_report():
     """
     Generate a full excel report with all info of your database
     """
-    if state['verbose']:
-        console.rule("[bold] Full Report")
     reports = [
         "active_conection", "all_locks", "bloat", "blocking",
         "buffercache_stats", "buffercache_usage", "cache_hit",
@@ -529,6 +415,7 @@ def full_report():
 #         PG_EXTRAS_OUTLIERS_MIN_EXEC_RATIO = 33 # 33%
 #     """
 #     pass
+
 
 @app.command()
 def version():

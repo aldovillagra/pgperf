@@ -31,9 +31,6 @@ class Db():
     def kill_all(self):
         self.exec(self._get_sql("kill_all.sql"))
 
-    def pg_stat_statements_reset(self):
-        self.exec(self._get_sql("pg_stat_statements_reset.sql"))
-
     def active_conection(self):
         return self.read_sql(self._get_sql("active_conection.sql"))
 
@@ -129,3 +126,25 @@ class Db():
 
     def vacuum_stats(self):
         return self.read_sql(self._get_sql("vacuum_stats.sql"))
+
+    # Monitor
+    def pg_stat_activity(self):
+        return self.read_sql(self._get_sql("monitor/pg_stat_activity.sql"))
+
+    def pg_stat_replication(self):
+        return self.read_sql(self._get_sql("monitor/pg_stat_replication.sql"))
+
+    def pg_stat_wal_receiver(self):
+        return self.read_sql(self._get_sql("monitor/pg_stat_wal_receiver.sql"))
+
+    def pg_stat_subscription(self):
+        return self.read_sql(self._get_sql("monitor/pg_stat_subscription.sql"))
+
+    def pg_stat_ssl(self):
+        return self.read_sql(self._get_sql("monitor/pg_stat_ssl.sql"))
+
+    def pg_stat_progress_vacuum(self):
+        return self.read_sql(self._get_sql("monitor/pg_stat_progress_vacuum.sql"))
+
+    def pg_stat_statements_reset(self):
+        return self.read_sql(self._get_sql("monitor/pg_stat_statements_reset.sql"))
