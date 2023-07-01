@@ -10,7 +10,7 @@ state = {"conf": config['prod'], "path": "server/config/"}
 @app.callback()
 def main(verbose: bool = False, debug: bool = False, conf: str = ""):
     """
-    Additional Supplied Modules 
+    Server configuration information
     """
     if conf:
         state['conf'] = config[conf]
