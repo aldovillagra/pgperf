@@ -299,6 +299,7 @@ def unused_indexes():
 def full_report():
     """
     Generate a full excel report with all info of your database
+    # TODO: Need to improve, I don't think that is working in this way.
     """
     reports = [
         "active_conection", "all_locks", "bloat", "blocking",
@@ -312,7 +313,7 @@ def full_report():
         "table_index_size", "unused_indexes", "vacuum_stats"]
     writer = pd.ExcelWriter("full_report.xlsx", engine="xlsxwriter")
     db = Db(state['conf'])
-    with console.status("[bold green]Working on tasks...") as status:
+    with console.status("[bold green]Working on tasks..."):
         while reports:
             report = reports.pop(0)
             expr = "db." + report + "()"

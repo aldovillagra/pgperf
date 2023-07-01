@@ -3,10 +3,13 @@ from pgperf.db import Db
 import typer
 from pgperf.server.stats import app as stats_app
 from pgperf.server.additional import app as additional_app
+from pgperf.server.configuration import app as configuration_all
 
 app = typer.Typer()
 app.add_typer(stats_app, name="stats")
 app.add_typer(additional_app, name="additional")
+app.add_typer(configuration_all, name="configuration")
+
 state = {"conf": config['prod'], "path": "server/"}
 
 

@@ -1,5 +1,4 @@
-from pgperf import console, config
-from pgperf.db import Db
+from pgperf import config
 import typer
 from pgperf.server.stats.dinamic import app as dinamic_app
 from pgperf.server.stats.collected import app as collected_app

@@ -11,7 +11,7 @@ default_config = user_home + '/.pgperf.yml'
 try:
     OmegaConf.load(default_config)
 except Exception:
-    console.print(f"[white] Creating default config...")
+    console.print("[white] Creating default config...")
     conf_yaml = """
 prod:
   db:
