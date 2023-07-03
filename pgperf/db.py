@@ -25,8 +25,15 @@ class Db():
         template = env.get_template(name)
         return text(template.render())
 
+    def _get_sql_with_var(self, name, variable):
+        template = env.get_template(name)
+        return text(template.render(variable=variable))
+
     def get_from_path(self, path, name):
         return self.read_sql(self._get_sql(path + name + ".sql"))
+
+    def get_from_path_with_var(self, path, name, variable):
+        return self.read_sql(self._get_sql_with_var(path + name + ".sql", variable))
 
     def exec_from_path(self, path, name):
         return self.exec(self._get_sql(path + name + ".sql"))
