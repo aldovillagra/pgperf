@@ -1,0 +1,12 @@
+site_name: pgperf
+theme: readthedocs
+sources_dir: docs
+templates_dir: docs/templates
+repo: https://github.com/aldovillagra/pgperf
+version: master
+pages:
+  - page: "pgperf/main.md"
+    source: "pgperf/main.py"
+    functions:
+      - all_locks
+      - bloat

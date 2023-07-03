@@ -1,0 +1,5 @@
+site_name: pgperf
+theme: readthedocs
+
+markdown_extensions:
+    - mkdocs-typer
