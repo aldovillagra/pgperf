@@ -102,7 +102,7 @@ Usage: pgperf [OPTIONS] COMMAND [ARGS]...
 </div>
 
 
-### Server
+### PostgreSQL Server Information
 <div class="termy">
 
 ```console
@@ -136,7 +136,235 @@ Usage: pgperf [OPTIONS] COMMAND [ARGS]...
 ``` 
 </div>
 
-### Table
+#### PostgreSQL Server Additional Information
+
+<div class="termy">
+
+```console
+❯ pgperf server additional --help
+                                                                               
+ Usage: pgperf server additional [OPTIONS] COMMAND [ARGS]...                   
+                                                                               
+ Additional Supplied Modules                                                   
+                                                                               
+╭─ Options ───────────────────────────────────────────────────────────────────╮
+│ --verbose    --no-verbose          [default: no-verbose]                    │
+│ --debug      --no-debug            [default: no-debug]                      │
+│ --conf                       TEXT                                           │
+│ --help                             Show this message and exit.              │
+╰─────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ──────────────────────────────────────────────────────────────────╮
+│ add-all-recommended-extensions  Adding Extensions [sslinfo, pg_buffercache, │
+│                                 pg_stat_statements] to your database.       │
+│ extensions                      Get available and installed extensions      │
+╰─────────────────────────────────────────────────────────────────────────────╯
+``` 
+</div>
+
+#### PostgreSQL Server Configuration 
+
+<div class="termy">
+
+```console
+❯ pgperf server configuration --help
+                                                                               
+ Usage: pgperf server configuration [OPTIONS] COMMAND [ARGS]...                
+                                                                               
+ Server configuration information                                              
+                                                                               
+╭─ Options ───────────────────────────────────────────────────────────────────╮
+│ --verbose    --no-verbose          [default: no-verbose]                    │
+│ --debug      --no-debug            [default: no-debug]                      │
+│ --conf                       TEXT                                           │
+│ --help                             Show this message and exit.              │
+╰─────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ──────────────────────────────────────────────────────────────────╮
+│ authentication           Show Authentication configuration                  │
+│ connection-settings      Show Connection Settings configuration             │
+│ disk                     Show Kernel Resource Usage configuration           │
+│ file-locations           Show File Locations configuration                  │
+│ kernel                   Show Kernel configuration                          │
+│ memory                   Show Memory configuration                          │
+│ replication              Server Replication information                     │
+│ show-all                 Show all Server configuration                      │
+│ ssl                      Show Authentication configuration                  │
+│ vacuum                   Show Cost-based Vacuum Delay configuration         │
+│ writer                   Show Background Writer configuration               │
+╰─────────────────────────────────────────────────────────────────────────────╯
+``` 
+</div>
+
+### PostgreSQL Server Stats
+
+<div class="termy">
+
+```console
+❯ pgperf server stats --help
+                                                                               
+ Usage: pgperf server stats [OPTIONS] COMMAND [ARGS]...                        
+                                                                               
+ The Statistics Collector. PostgreSQL's statistics collector is a subsystem    
+ that supports collection and reporting of information about server activity.  
+                                                                               
+╭─ Options ───────────────────────────────────────────────────────────────────╮
+│ --verbose    --no-verbose          [default: no-verbose]                    │
+│ --debug      --no-debug            [default: no-debug]                      │
+│ --conf                       TEXT                                           │
+│ --help                             Show this message and exit.              │
+╰─────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ──────────────────────────────────────────────────────────────────╮
+│ collected             Collected Statistics Views                            │
+│ dinamic               Dynamic Statistics Views                              │
+╰─────────────────────────────────────────────────────────────────────────────╯
+``` 
+</div>
+
+### PostgreSQL Server Stats Collected
+
+<div class="termy">
+
+```console
+❯ pgperf server stats collected --help
+                                                                               
+ Usage: pgperf server stats collected [OPTIONS] COMMAND [ARGS]...              
+                                                                               
+ Collected Statistics Views                                                    
+                                                                               
+╭─ Options ───────────────────────────────────────────────────────────────────╮
+│ --verbose    --no-verbose          [default: no-verbose]                    │
+│ --debug      --no-debug            [default: no-debug]                      │
+│ --conf                       TEXT                                           │
+│ --help                             Show this message and exit.              │
+╰─────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ──────────────────────────────────────────────────────────────────╮
+│ all-indexes          One row for each index in the current database,        │
+│                      showing statistics about accesses to that specific     │
+│                      index. See pg_stat_all_indexes for details.            │
+│                      (Compatible with PostgresSQL >= 11.0 )                 │
+│ all-tables           One row for each table in the current database,        │
+│                      showing statistics about accesses to that specific     │
+│                      table.  See pg_stat_all_tables for details.            │
+│                      (Compatible with PostgresSQL >= 11.0 )                 │
+│ archiver             One row only, showing statistics about the WAL         │
+│                      archiver process's activity.  See pg_stat_archiver for │
+│                      details. ( Compatible with PostgresSQL >= 11.0 )       │
+│ bgwriter             One row only, showing statistics about the background  │
+│                      writer process's activity.  See pg_stat_bgwriter for   │
+│                      details. ( Compatible with PostgresSQL >= 11.0 )       │
+│ database             One row per database, showing database-wide            │
+│                      statistics.  See pg_stat_database for details.         │
+│                      (Compatible with PostgresSQL >= 11.0 )                 │
+│ database-conflicts   One row per database, showing database-wide statistics │
+│                      about query cancels due to conflict with recovery on   │
+│                      standby servers.  See pg_stat_database_conflicts for   │
+│                      details. (Compatible with PostgresSQL >= 11.0 )        │
+│ io-all-indexes       One row for each index in the current database,        │
+│                      showing statistics  about I/O on that specific index.  │
+│                      See pg_statio_all_indexes for details. (Compatible     │
+│                      with PostgresSQL >= 11.0 )                             │
+│ io-all-sequences     One row for each sequence in the current database,     │
+│                      showing statistics about I/O on that specific          │
+│                      sequence. See pg_statio_all_sequences  for details.    │
+│                      (Compatible with PostgresSQL >= 11.0 )                 │
+│ io-all-tables        One row for each table in the current database,        │
+│                      showing statistics about I/O on that specific table.   │
+│                      See pg_statio_all_tables for details. (Compatible with │
+│                      PostgresSQL >= 11.0 )                                  │
+│ io-sys-indexes       Same as pg_statio_all_indexes, except that only        │
+│                      indexes on system tables are shown. (Compatible with   │
+│                      PostgresSQL >= 11.0 )                                  │
+│ io-sys-sequences     Same as pg_statio_all_sequences, except that only      │
+│                      system sequences  are shown. (Presently, no system     │
+│                      sequences are defined, so this view is always empty.)  │
+│                      (Compatible with PostgresSQL >= 11.0 )                 │
+│ io-sys-tables        Same as pg_statio_all_tables, except that only system  │
+│                      tables are shown. (Compatible with PostgresSQL >= 11.0 │
+│                      )                                                      │
+│ io-user-indexes      Same as pg_statio_all_indexes, except that only        │
+│                      indexes on user  tables are shown. (Compatible with    │
+│                      PostgresSQL >= 11.0 )                                  │
+│ io-user-sequences    Same as pg_statio_all_sequences, except that only user │
+│                      sequences  are shown. (Compatible with PostgresSQL >=  │
+│                      11.0 )                                                 │
+│ io-user-tables       Same as pg_statio_all_tables, except that only user    │
+│                      tables are shown. (Compatible with PostgresSQL >= 11.0 │
+│                      )                                                      │
+│ sys-indexes          Same as pg_stat_all_indexes, except that only indexes  │
+│                      on system tables are shown. (Compatible with           │
+│                      PostgresSQL >= 11.0 )                                  │
+│ user-functions       One row for each tracked function, showing statistics  │
+│                      about executions of that function. See                 │
+│                      pg_stat_user_functions for details. (Compatible with   │
+│                      PostgresSQL >= 11.0 )                                  │
+│ user-tables          Same as pg_stat_all_tables, except that only user      │
+│                      tables are shown. (Compatible with PostgresSQL >= 11.0 │
+│                      )                                                      │
+│ xact-all-tables      Similar to pg_stat_all_tables, but counts actions      │
+│                      taken so far within  the current transaction (which    │
+│                      are not yet included in pg_stat_all_tables and related │
+│                      views). The columns for numbers of live and dead rows  │
+│                      and vacuum and analyze actions are not present in this │
+│                      view. (Compatible with PostgresSQL >= 11.0 )           │
+│ xact-user-functions  Similar to pg_stat_user_functions, but counts only     │
+│                      calls during the current transaction (which are not    │
+│                      yet included in  pg_stat_user_functions). (Compatible  │
+│                      with PostgresSQL >= 11.0 )                             │
+│ xact-user-tables     Same as pg_stat_xact_all_tables, except that only user │
+│                      tables are shown. (Compatible with PostgresSQL >= 11.0 │
+│                      )                                                      │
+╰─────────────────────────────────────────────────────────────────────────────╯
+
+``` 
+</div>
+
+### PostgreSQL Server Stats Dinamic
+
+<div class="termy">
+
+```console
+❯ pgperf server stats dinamic --help
+                                                                               
+ Usage: pgperf server stats dinamic [OPTIONS] COMMAND [ARGS]...                
+                                                                               
+ Dynamic Statistics Views                                                      
+                                                                               
+╭─ Options ───────────────────────────────────────────────────────────────────╮
+│ --verbose    --no-verbose          [default: no-verbose]                    │
+│ --debug      --no-debug            [default: no-debug]                      │
+│ --conf                       TEXT                                           │
+│ --help                             Show this message and exit.              │
+╰─────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ──────────────────────────────────────────────────────────────────╮
+│ activity          One row per server process, showing information related   │
+│                   to the current  activity of that process, such as state   │
+│                   and current query.  See pg_stat_activity for details. (   │
+│                   >= PostgresSQL  11.0 )                                    │
+│ progress-vacuum   One row for each backend (including autovacuum worker     │
+│                   processes)  running VACUUM, showing current progress. (   │
+│                   >= PostgresSQL  11.0 )                                    │
+│ replication       One row per WAL sender process, showing statistics about  │
+│                   replication  to that sender's connected standby server.   │
+│                   See pg_stat_replication for details. ( >= PostgresSQL     │
+│                   11.0 )                                                    │
+│ ssl               One row per connection (regular and replication), showing │
+│                   information  about SSL used on this connection. ( >=      │
+│                   PostgresSQL  11.0 ) See pg_stat_ssl for details.          │
+│ statements-reset  pg_stat_statements_reset discards statistics gathered so  │
+│                   far by  pg_stat_statements ( >= PostgresSQL  11.0 )       │
+│ subscription      At least one row per subscription, showing information    │
+│                   about the  subscription workers.  See                     │
+│                   pg_stat_subscription for details. ( >= PostgresSQL  11.0  │
+│                   )                                                         │
+│ wal-receiver      Only one row, showing statistics about the WAL receiver   │
+│                   from that  receiver's connected server. See               │
+│                   pg_stat_wal_receiver for details. ( >= PostgresSQL  11.0  │
+│                   )                                                         │
+╰─────────────────────────────────────────────────────────────────────────────╯
+
+```
+</div>
+
+### PostgreSQL Table Information
 <div class="termy">
 
 ```console
@@ -169,7 +397,7 @@ Usage: pgperf [OPTIONS] COMMAND [ARGS]...
 ``` 
 </div>
 
-### Index
+### PostgreSQL Index Information
 <div class="termy">
 
 ```console
