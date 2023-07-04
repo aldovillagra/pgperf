@@ -3,7 +3,6 @@ from pgperf.db import Db
 from pgperf.server import app as server_app
 from pgperf.index import app as index_app
 from pgperf.table import app as table_app
-import pandas as pd
 import typer
 
 app = typer.Typer()
