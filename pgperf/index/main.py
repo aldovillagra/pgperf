@@ -4,7 +4,7 @@ import typer
 
 app = typer.Typer()
 
-state = {"conf": config['prod'], "path": "server/"}
+state = {"conf": config['prod'], "path": "index/"}
 
 
 @app.callback()
@@ -22,8 +22,8 @@ def duplicate():
     Show multiple indexes that have the same set of columns, same opclass, expression and predicate.
     """
     db = Db(state['conf'])
-    result = db.duplicate_indexes()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'duplicate_indexes')
+    console.print(result.to_markdown(), justify="left")
 
 
 @app.command()
@@ -32,8 +32,8 @@ def cache_hit():
     Calculates your cache hit rate for reading indexes
     """
     db = Db(state['conf'])
-    result = db.index_cache_hit()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'index_cache_hit')
+    console.print(result.to_markdown(), justify="left")
 
 
 @app.command()
@@ -42,8 +42,8 @@ def scans():
     Number of scans performed on indexes
     """
     db = Db(state['conf'])
-    result = db.index_scans()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'index_scans')
+    console.print(result.to_markdown(), justify="left")
 
 
 @app.command()
@@ -52,8 +52,8 @@ def size():
     The size of indexes, descending by size, in MB.
     """
     db = Db(state['conf'])
-    result = db.index_size()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'index_size')
+    console.print(result.to_markdown(), justify="left")
 
 
 @app.command()
@@ -62,8 +62,8 @@ def usage():
     Index hit rate (effective databases are at 99% and up)
     """
     db = Db(state['conf'])
-    result = db.index_usage()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'index_usage')
+    console.print(result.to_markdown(), justify="left")
 
 
 @app.command()
@@ -72,8 +72,8 @@ def null():
     Find indexes with a high ratio of NULL values
     """
     db = Db(state['conf'])
-    result = db.null_indexes()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'null_indexes')
+    console.print(result.to_markdown(), justify="left")
 
 
 @app.command()
@@ -82,7 +82,7 @@ def total_size():
     Total size of all indexes in MB
     """
     db = Db(state['conf'])
-    result = db.total_index_size()
+    result = db.get_from_path(state['path'], 'total_index_size')
     console.print(result.to_markdown(), justify="left")
 
 
@@ -94,8 +94,8 @@ def unused():
     but may not in the future as the table grows
     """
     db = Db(state['conf'])
-    result = db.unused_indexes()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'unused_indexes')
+    console.print(result.to_markdown(), justify="left")
 
 
 @app.command()
@@ -104,8 +104,8 @@ def all():
     List all the indexes with their corresponding tables and columns.
     """
     db = Db(state['conf'])
-    result = db.indexes()
-    console.print(result.to_markdown(), justify="center")
+    result = db.get_from_path(state['path'], 'indexes')
+    console.print(result.to_markdown(), justify="left")
 
 
 if __name__ == "__main__":

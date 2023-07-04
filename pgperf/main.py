@@ -11,7 +11,7 @@ app.add_typer(server_app, name="server")
 app.add_typer(index_app, name="index")
 app.add_typer(table_app, name="table")
 
-state = {"conf": config['prod']}
+state = {"conf": config['prod'], "path": ""}
 
 
 @app.callback()
@@ -30,10 +30,8 @@ def all_locks():
     """
     List all current locks in your database
     """
-    if state['verbose']:
-        console.rule("[bold] All the current locks")
     db = Db(state['conf'])
-    result = db.all_locks()
+    result = db.get_from_path(state['path'], 'all_locks')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -43,7 +41,7 @@ def blocking():
     Get all statements that are currently holding locks in your database
     """
     db = Db(state['conf'])
-    result = db.blocking()
+    result = db.get_from_path(state['path'], 'blocking')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -53,7 +51,7 @@ def buffercache_stats():
     Get all Buffercache Stats
     """
     db = Db(state['conf'])
-    result = db.buffercache_stats()
+    result = db.get_from_path(state['path'], 'buffercache_stats')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -63,7 +61,7 @@ def buffercache_usage():
     Get all Buffercache Usage
     """
     db = Db(state['conf'])
-    result = db.buffercache_usage()
+    result = db.get_from_path(state['path'], 'buffercache_usage')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -73,7 +71,7 @@ def cache_hits():
     Get all cache hits
     """
     db = Db(state['conf'])
-    result = db.cache_hit()
+    result = db.get_from_path(state['path'], 'cache_hit')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -84,7 +82,7 @@ def calls_legacy():
     """
     # TODO: Pendind test and validate
     db = Db(state['conf'])
-    result = db.calls_legacy()
+    result = db.get_from_path(state['path'], 'calls_legacy')
     console.print(result.to_markdown())
 
 
@@ -94,7 +92,7 @@ def calls():
     Get the queries that have highest frequency of execution
     """
     db = Db(state['conf'])
-    result = db.calls()
+    result = db.get_from_path(state['path'], 'calls')
     console.print(result.to_markdown())
 
 
@@ -104,7 +102,7 @@ def locks():
     Queries with active exclusive locks
     """
     db = Db(state['conf'])
-    result = db.locks()
+    result = db.get_from_path(state['path'], 'calls')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -114,7 +112,7 @@ def long_running_queries():
     All queries longer than five minutes by descending duration
     """
     db = Db(state['conf'])
-    result = db.long_running_queries()
+    result = db.get_from_path(state['path'], 'long_running_queries')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -124,7 +122,7 @@ def outliers():
     Queries that have longest execution time in aggregate
     """
     db = Db(state['conf'])
-    result = db.outliers()
+    result = db.get_from_path(state['path'], 'outliers')
     console.print(result.to_markdown())
 
 

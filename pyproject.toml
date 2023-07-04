@@ -8,7 +8,7 @@ readme = "long_description.md"
 homepage = "https://github.com/aldovillagra/pgperf"
 repository = "https://github.com/aldovillagra/pgperf"
 documentation = "https://github.com/aldovillagra/pgperf#readme"
-include = ["README.rst", "LICENSE.txt"]
+include = ["README.md", "LICENSE.txt"]
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/aldovillagra/pgperf/issues"

@@ -5,8 +5,8 @@ templates_dir: docs/templates
 repo: https://github.com/aldovillagra/pgperf
 version: master
 pages:
-  - page: "pgperf/main.md"
-    source: "pgperf/main.py"
+  - page: "pgperf/pgperf/main.md"
+    source: "pgperf/pgperf/main.py"
     functions:
       - all_locks
       - bloat
