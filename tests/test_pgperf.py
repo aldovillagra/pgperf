@@ -37,11 +37,16 @@ def test_buffercache_stats():
     assert result.exit_code == 0
 
 
-def test_cache_hits():
-    result = runner.invoke(app, ["--conf", "test", "cache-hits"])
+def test_buffercache_usage():
+    result = runner.invoke(app, ["--conf", "test", "buffercache-usage"])
     assert result.exit_code == 0
 
 
-def test_calls():
-    result = runner.invoke(app, ["--conf", "test", "calls"])
+def test_locks():
+    result = runner.invoke(app, ["--conf", "test", "locks"])
+    assert result.exit_code == 0
+
+
+def test_long_running_queries():
+    result = runner.invoke(app, ["--conf", "test", "long-running-queries"])
     assert result.exit_code == 0

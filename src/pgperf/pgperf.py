@@ -67,43 +67,12 @@ def buffercache_usage():
 
 
 @app.command()
-def cache_hits():
-    """
-    Get all cache hits
-    """
-    db = Db(state['conf'])
-    result = db.get_from_path(state['path'], 'cache_hit')
-    console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
-def calls_legacy():
-    """
-    Get the queries that have highest frequency of execution
-    """
-    # TODO: Pendind test and validate
-    db = Db(state['conf'])
-    result = db.get_from_path(state['path'], 'calls_legacy')
-    console.print(result.to_markdown())
-
-
-@app.command()
-def calls():
-    """
-    Get the queries that have highest frequency of execution
-    """
-    db = Db(state['conf'])
-    result = db.get_from_path(state['path'], 'calls')
-    console.print(result.to_markdown())
-
-
-@app.command()
 def locks():
     """
     Queries with active exclusive locks
     """
     db = Db(state['conf'])
-    result = db.get_from_path(state['path'], 'calls')
+    result = db.get_from_path(state['path'], 'locks')
     console.print(result.to_markdown(), justify="center")
 
 
@@ -115,16 +84,6 @@ def long_running_queries():
     db = Db(state['conf'])
     result = db.get_from_path(state['path'], 'long_running_queries')
     console.print(result.to_markdown(), justify="center")
-
-
-@app.command()
-def outliers():
-    """
-    Queries that have longest execution time in aggregate
-    """
-    db = Db(state['conf'])
-    result = db.get_from_path(state['path'], 'outliers')
-    console.print(result.to_markdown())
 
 
 @app.command()
