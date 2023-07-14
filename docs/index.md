@@ -1,7 +1,7 @@
 # CLI
 
 ::: mkdocs-typer
-    :module: pgperf.main
+    :module: pgperf.pgperf
     :command: app
     :prog_name: pgperf
     :depth: 2

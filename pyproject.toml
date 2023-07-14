@@ -1,58 +1,106 @@
-[tool.poetry]
-name = "pgperf"
-version = "1.0.1"
-description = "PostgreSQL Performance Tools"
-authors = ["Aldo A. Villagra B. <aldovillagra@gmail.com>"]
-license = "GPL-3.0-or-later"
-readme = "long_description.md"
-homepage = "https://github.com/aldovillagra/pgperf"
-repository = "https://github.com/aldovillagra/pgperf"
-documentation = "https://github.com/aldovillagra/pgperf#readme"
-include = ["README.md", "LICENSE.txt"]
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/aldovillagra/pgperf/issues"
+[tool.hatch]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-omegaconf = "^2.2.1"
-pandas = "^1.4.2"
-SQLAlchemy = "^1.4.36"
-numpy = "^1.22.4"
-psycopg2 = "^2.9.3"
-tabulate = "^0.8.9"
-Jinja2 = "^3.1.2"
-XlsxWriter = "^3.0.3"
-typer = {extras = ["all"], version = "^0.9.0"}
+[tool.hatch.version]
+source = "vcs"
 
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
+[tool.hatch.build.hooks.vcs]
+version-file = "src/pgperf/__version__.py"
 
-[tool.poetry.group.dev.dependencies]
-mkdocs = "^1.4.3"
-ruff = "^0.0.275"
-ipdb = "^0.13.13"
-deptry = "^0.12.0"
-poethepoet = "^0.20.0"
-autopep8 = "^2.0.2"
-bpython = "^0.24"
-mkdocs-typer = "^0.0.3"
-mkdocstrings = {extras = ["python"], version = "^0.22.0"}
-mkdocs-material = "^9.1.18"
-mkdocs-minify-plugin = "^0.6.4"
-mkdocs-git-revision-date-localized-plugin = "^1.2.0"
-mkdocs-git-authors-plugin = "^0.7.2"
-mkdocs-table-reader-plugin = "^2.0.1"
-mkdocs-img2fig-plugin = "^0.9.3"
-mknotebooks = "^0.7.1"
-mkdocs-awesome-pages-plugin = "^2.9.1"
-mkdocs-enumerate-headings-plugin = "^0.6.1"
-mkdocs-print-site-plugin = "^2.3.5"
-mkgendocs = "^0.9.2"
+[tool.hatch.envs.dev]
+extra-dependencies = [
+  "ruff",
+  "ipdb",
+  "deptry",
+  "bpython",
+  "autopep8",
+  "flake8",
+  "black",
+  "isort",
+  "deptry",
+]
+[[tool.hatch.envs.dev.matrix]]
+python = ["3.10", "3.11"]
+[tool.hatch.envs.dev.scripts]
+check_flake = "flake8 ./src/pgperf"
+check_black = "black --check --diff ./src/pgperf"
+check_isort = "isort --check-only --diff ."
+check_ruff = "ruff check ./src/pgperf"
+check_deptry = "deptry ./src/pgperf"
+
+
+[tool.hatch.envs.test]
+extra-dependencies = [
+  "coverage",
+  "pytest",
+  "pytest-cov",
+  "pytest-mock",
+]
+[tool.hatch.envs.test.scripts]
+run_pytest = "pytest ./tests"
+[[tool.hatch.envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11"]
+
+
+[tool.hatch.envs.docs]
+detached = true
+extra-dependencies = [
+  "mkdocs",
+  "mkdocs-typer",
+  "mkdocstrings",
+  "mkdocs-material",
+  "mkdocs-minify-plugin",
+  "mkdocs-git-revision-date-localized-plugin",
+  "mkdocs-git-authors-plugin",
+  "mkdocs-table-reader-plugin",
+  "mkdocs-img2fig-plugin",
+  "mknotebooks",
+  "mkdocs-awesome-pages-plugin",
+  "mkdocs-enumerate-headings-plugin",
+  "mkdocs-print-site-plugin",
+  "mkgendocs",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "mkdocs build --clean --strict"
+serve = "mkdocs serve --dev-addr localhost:8000"
+
+[[tool.hatch.envs.docs.matrix]]
+python = ["3.11"]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 [tool.poetry.scripts]
 pgperf = 'pgperf.main:app'
+
+[project]
+name = "pgperf"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.8"
+license = "GPL-3.0-or-later"
+authors = [
+  { name = "Aldo A. Villagra B.", email = "aldovillagra@gmail.com" },
+]
+classifiers = [
+  "Topic :: Database", "Environment :: Console",
+]
+Documentation = ""
+dependencies = [
+  "omegaconf",
+  "pandas[all]",
+  "SQLAlchemy",
+  "psycopg2",
+  "Jinja2",
+  "XlsxWriter",
+  "typer[all]",
+]
+[project.urls]
+Documentation = "https://aldovillagra.github.io/pgperf/"
+"Source code" = "https://github.com/aldovillagra/pgperf/"
+"Bug Tracker" = "https://github.com/aldovillagra/pgperf/issues"
+homepage = "https://github.com/aldovillagra/pgperf"
+[project.scripts]
+pgperf = "pgperf.pgperf:app"

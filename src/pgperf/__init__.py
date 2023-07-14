@@ -1,5 +1,3 @@
-__version__ = '1.0.1'
-
 import os
 from rich.console import Console
 from omegaconf import OmegaConf

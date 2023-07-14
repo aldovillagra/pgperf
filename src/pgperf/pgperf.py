@@ -1,4 +1,6 @@
-from pgperf import console, config, __version__
+from pgperf import console, config
+
+from pgperf.__version__ import __version__
 from pgperf.db import Db
 from pgperf.server import app as server_app
 from pgperf.index import app as index_app
@@ -127,14 +129,11 @@ def outliers():
 
 @app.command()
 def version():
-    console.rule("[bold red]PG Extras APP", align="center")
-    console.print()
-    console.print(
-        "[bold] Postgresql Extras APP", justify="center")
-    console.print(f"Installed version => {__version__}", justify="center")
-    console.print(f"Connected to ==> {config}", justify="center")
-    console.print()
-    console.rule("[bold red]..::==> Thanks <==::..")
+    console.print(__version__)
+
+
+def config():
+    console.print(config)
 
 
 if __name__ == "__main__":
