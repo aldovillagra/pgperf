@@ -10,7 +10,7 @@ state = {"conf": config['prod']}
 
 
 @app.callback()
-def main(verbose: bool = False, debug: bool = False, conf: str = ""):
+def main(conf: str = ""):
     """
     The Statistics Collector.
     PostgreSQL's statistics collector is a subsystem that supports collection and reporting of information about server activity. 

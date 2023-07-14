@@ -17,7 +17,7 @@ def process_with_variables(configs):
 
 
 @app.callback()
-def main(verbose: bool = False, debug: bool = False, conf: str = ""):
+def main(conf: str = ""):
     """
     Server Replication information
     """

@@ -8,7 +8,7 @@ state = {"conf": config['prod'], "path": "server/additional/"}
 
 
 @app.callback()
-def main(verbose: bool = False, debug: bool = False, conf: str = ""):
+def main(conf: str = ""):
     """
     Additional Supplied Modules 
     """

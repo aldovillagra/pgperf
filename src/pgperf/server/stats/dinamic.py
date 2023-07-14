@@ -7,7 +7,7 @@ state = {"conf": config['prod'], "path": "server/stats/dinamic/"}
 
 
 @app.callback()
-def main(verbose: bool = False, debug: bool = False, conf: str = ""):
+def main(conf: str = ""):
     """
     Dynamic Statistics Views 
     """

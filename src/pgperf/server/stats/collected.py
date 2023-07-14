@@ -7,7 +7,7 @@ state = {"conf": config['prod'], "path": "server/stats/collected/"}
 
 
 @app.callback()
-def collected(verbose: bool = False, debug: bool = False, conf: str = ""):
+def collected(conf: str = ""):
     """
     Collected Statistics Views 
     """
