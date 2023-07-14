@@ -1,5 +1,4 @@
 from pgperf import console, config
-
 from pgperf.__version__ import __version__
 from pgperf.db import Db
 from pgperf.server import app as server_app
@@ -23,7 +22,11 @@ def main(conf: str = ""):
     The goal of this project is to provide powerful insights into the PostgreSQL database for Python apps that are not using the Heroku PostgreSQL plugin.
     """
     if conf:
+        import ipdb
+        ipdb.set_trace()
         state['conf'] = config[conf]
+    else:
+        state['conf'] = config['prod']
 
 
 @app.command()
@@ -132,7 +135,10 @@ def version():
     console.print(__version__)
 
 
+@app.command()
 def config():
+    import ipdb
+    ipdb.set_trace()
     console.print(config)
 
 
