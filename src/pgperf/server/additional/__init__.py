@@ -32,8 +32,8 @@ def add_all_recommended_extensions():
     Adding Extensions [sslinfo, pg_buffercache, pg_stat_statements] to your database.
     """
     db = Db(state['conf'])
-    db.exec_from_path(state['path'], "add_al")
-    db.add_extensions()
+    db.exec_from_path(state['path'], "add_all_recommended_extensions")
+    extensions()
 
 
 if __name__ == "__main__":

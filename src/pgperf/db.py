@@ -19,7 +19,8 @@ class Db():
 
     def exec(self, SQL):
         engine = create_engine(self.string_connection)
-        engine.execute(SQL)
+        with engine.begin() as conn:
+            conn.execute(SQL)
 
     def _get_sql(self, name):
         template = env.get_template(name)
