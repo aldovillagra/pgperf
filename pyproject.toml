@@ -103,4 +103,4 @@ Documentation = "https://aldovillagra.github.io/pgperf/"
 "Bug Tracker" = "https://github.com/aldovillagra/pgperf/issues"
 homepage = "https://github.com/aldovillagra/pgperf"
 [project.scripts]
-pgperf = "pgperf.main:app"
+pgperf = "pgperf.pgperf:app"

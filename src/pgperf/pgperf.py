@@ -1,10 +1,11 @@
-from pgperf import console, config
-from pgperf.__version__ import __version__
-from pgperf.db import Db
-from pgperf.server import app as server_app
-from pgperf.index import app as index_app
-from pgperf.table import app as table_app
 import typer
+from pgperf.table import app as table_app
+from pgperf.index import app as index_app
+from pgperf.server import app as server_app
+from pgperf.db import Db
+from pgperf.__version__ import __version__
+from pgperf import console, config
+
 
 app = typer.Typer()
 app.add_typer(server_app, name="server")
@@ -22,11 +23,7 @@ def main(conf: str = ""):
     The goal of this project is to provide powerful insights into the PostgreSQL database for Python apps that are not using the Heroku PostgreSQL plugin.
     """
     if conf:
-        import ipdb
-        ipdb.set_trace()
         state['conf'] = config[conf]
-    else:
-        state['conf'] = config['prod']
 
 
 @app.command()
@@ -136,10 +133,8 @@ def version():
 
 
 @app.command()
-def config():
-    import ipdb
-    ipdb.set_trace()
-    console.print(config)
+def show_config():
+    console.print(state['conf'])
 
 
 if __name__ == "__main__":

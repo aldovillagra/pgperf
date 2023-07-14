@@ -5,7 +5,7 @@ from jinja2 import Environment, PackageLoader
 
 console = Console()
 user_home = os.path.expanduser('~')
-default_config = user_home + '/.pgperf.yaml'
+default_config = user_home + '/.pgperf.yml'
 try:
     OmegaConf.load(default_config)
 except Exception:

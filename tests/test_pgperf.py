@@ -1,5 +1,5 @@
 from typer.testing import CliRunner
-from pgperf.main import app
+from pgperf.pgperf import app
 from pgperf.__version__ import __version__
 
 
@@ -18,12 +18,12 @@ def test_version():
 
 
 def test_config():
-    result = runner.invoke(app, ["--conf", "test", "config"])
+    result = runner.invoke(app, ["--conf", "test", "show-config"])
     assert result.exit_code == 0
 
 
 def test_all_locks():
-    result = runner.invoke(app, ["--conf", "test", "all_locks"])
+    result = runner.invoke(app, ["--conf", "test", "all-locks"])
     assert result.exit_code == 0
 
 
@@ -33,12 +33,12 @@ def test_blocking():
 
 
 def test_buffercache_stats():
-    result = runner.invoke(app, ["--conf", "test", "buffercache_stats"])
+    result = runner.invoke(app, ["--conf", "test", "buffercache-stats"])
     assert result.exit_code == 0
 
 
 def test_cache_hits():
-    result = runner.invoke(app, ["--conf", "test", "cache_hits"])
+    result = runner.invoke(app, ["--conf", "test", "cache-hits"])
     assert result.exit_code == 0
 
 
