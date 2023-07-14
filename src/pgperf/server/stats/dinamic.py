@@ -86,16 +86,5 @@ def progress_vacuum():
     console.print(result.to_markdown(), justify="left")
 
 
-@app.command()
-def statements_reset():
-    """
-    pg_stat_statements_reset discards statistics gathered so far by 
-    pg_stat_statements ( >= PostgresSQL  11.0 )
-    """
-    db = Db(state['conf'])
-    result = db.get_from_path(state['path'], "pg_stat_statements_reset")
-    console.print(result.to_markdown(), justify="center")
-
-
 if __name__ == "__main__":
     app()
